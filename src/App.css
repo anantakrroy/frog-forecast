@@ -1,36 +1,124 @@
-.container {
-  display:grid;
-  grid-template-columns: 1fr 1fr;
+body {
+  overscroll-behavior: contain;
 }
 
-.user-input, .daily-forecast {
-  height: 100vh;
+body::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+body::-webkit-scrollbar-track {
   background-color: black;
-  color: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #eb6848;
+}
+
+.orangeTxt {
+  color: #eb6848;
+}
+
+.app-title {
+  position: fixed;
+  top: -20%;
+  left: -3%;
+  font-family: Righteous;
+  margin: 10%;
+}
+
+@keyframes logoanim {
+  0% {
+    opacity: 0.7;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+#app-logo {
+  animation-name: logoanim;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform: scale(0.5);
+  position: fixed;
+  top: -2%;
+  left: 15%;
+}
+
+#app-title {
+  font-size: 4rem;
+}
+
+.daily-forecast {
+  position: relative;
+  left: 50%;
+  max-width: 50%;
 }
 
 .user-input {
+  position: fixed;
+  top: 38%;
+  left: 7%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.user-input > * {
-  margin: 5px auto;
-}
-
-.btn-group {
-  display: flex;
+  margin-bottom: 3px;
 }
 
 .btn-group > button {
+  display: flex;
   margin: 0 4px;
   border-radius: 4px;
   padding: 3px;
 }
 
-#get-location {
-  display: flex;
-  align-items: center;
+#city-name {
+  padding: 3px;
+  height: 1.7em;
+  width: 280px;
+  font-size: 1.1rem;
+  color: rgb(50, 48, 48);
+  border: solid 1px #eb6848;
+  border-radius: 0;
+}
+
+#city-name:focus {
+  outline: none;
+  border: solid 2px #eb6848;
+  -webkit-box-shadow: 2px 2px 15px 0px rgb(235 104 72);
+  -moz-box-shadow: 2px 2px 15px 0px rgb(235 104 72);
+  box-shadow: 2px 2px 15px 0px rgb(235 104 72);
+}
+
+#loc-tag {
+  position: absolute;
+  /* position: fixed; */
+  /* top: 51%; */
+  left: 60%;
+  padding-top: 5px;
+}
+
+button {
+  transition: transform 0.5s ease-in-out;
+  cursor: pointer;
+  color: white;
+  background-color: #eb6848;
+  border: none;
+  height: 2.3rem;
+  width: 8rem;
+}
+
+button:hover {
+  transform: scale(1.03);
 }
