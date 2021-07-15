@@ -2,7 +2,7 @@ import appLogo from "./appLogo.png";
 import "./App.css";
 import CardList from "./components/CardList";
 import CurrentCard from "./components/CurrentCard";
-import OnlineStatus from "./utils/networkCheck";
+// import OnlineStatus from "./utils/networkCheck";
 import Error from "./components/Error";
 import { useEffect, useState } from "react";
 import { MdMyLocation } from "react-icons/md";
