@@ -1,11 +1,14 @@
 import appLogo from "./appLogo.png";
 import "./App.css";
+import dotenv from "dotenv";
 import CardList from "./components/CardList";
 import CurrentCard from "./components/CurrentCard";
 // import OnlineStatus from "./utils/networkCheck";
 import Error from "./components/Error";
 import { useEffect, useState } from "react";
 import { MdMyLocation } from "react-icons/md";
+
+dotenv.config();
 
 function App() {
   const [location, setLocation] = useState({
@@ -35,7 +38,7 @@ function App() {
   // Get city coordinates from city name
   function getCoords(city) {
     setCity(city);
-    const coordsurl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=94014be88226aec7a02dbc4b61bc3485`;
+    const coordsurl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.APP_ID}`;
     fetch(coordsurl)
       .then((res) => res.json())
       .then((data) => {

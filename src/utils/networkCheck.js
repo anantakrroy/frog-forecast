@@ -1,6 +1,6 @@
-function OnlineStatus() {
-    window.addEventListener('offline', () => false);
-    window.addEventListener('online', () => true);
-}
+// function OnlineStatus() {
+//     window.addEventListener('offline', () => false);
+//     window.addEventListener('online', () => true);
+// }
 
-export default OnlineStatus;
+// export default OnlineStatus;

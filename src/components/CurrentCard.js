@@ -1,8 +1,8 @@
-import { Chart } from "chart.js";
+// import { Chart } from "chart.js";
 import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import DateCalc from "../utils/dateCalc";
-import DayCalc from "../utils/dayCalc";
+// import DayCalc from "../utils/dayCalc";
 import "../styles/CurrentCard.css";
 
 function CurrentCard({ weather }) {
@@ -16,10 +16,12 @@ function CurrentCard({ weather }) {
   // const weatherChart = new Chart(ctx);
 
   // Weekly graph plot
-  // console.log(`Daily >> ${daily[0]}`);
-  const dailyHighs = daily.map((d) => d.temp.max.toFixed(1));
-  const dailyLows = daily.map((d) => d.temp.min.toFixed(1));
-  const dailyLabels = daily.map((d) => DateCalc(d.dt));
+  const dailyHighs = daily.map(d => d.temp.max);
+  const dailyLows = daily.map(d => d.temp.min);
+  const dailyLabels = daily.map(d => DateCalc(d.dt));
+  
+  console.log(`Daily >> ${+dailyHighs[0] % 100} and ${+dailyLows[0] / 100 }`);
+  // Data for chart
   const data = {
     labels: dailyLabels,
     color: "white",
@@ -37,7 +39,7 @@ function CurrentCard({ weather }) {
     ],
   };
 
-  // const config =
+  // Config for chart
   const options = {
     responsive: true,
     plugins: {
@@ -60,7 +62,7 @@ function CurrentCard({ weather }) {
           text: "Dates",
           color: "white",
           font: {
-            size: "10px",
+            size: "14px",
           },
         },
       },
@@ -71,7 +73,7 @@ function CurrentCard({ weather }) {
           text: "Temperature",
           color: "white",
           font: {
-            size: "10px",
+            size: "14px",
           },
         },
       },
