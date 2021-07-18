@@ -10,6 +10,11 @@ import { MdMyLocation } from "react-icons/md";
 
 dotenv.config();
 
+// if(result.error)
+//   throw result.error;
+
+// console.log(result.parsed);
+
 function App() {
   const [location, setLocation] = useState({
     latitude: 26.1445,
@@ -20,19 +25,19 @@ function App() {
   const [err, setErr] = useState({});
 
   useEffect(() => {
-    // console.log('useeffect called...');
+    console.log('useeffect called...API >> ', process.env.APP_ID);
     document.getElementById("city-name").value = city;
     // console.log('Value inside useeffect >> ', location);
-    getCity();
     const weatherurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=minutely,hourly&units=metric&appid=94014be88226aec7a02dbc4b61bc3485`;
-
+    
     // Get weather of place
     fetch(weatherurl)
-      .then((res) => res.json())
-      .then((data) => setForecast({ ...data }))
-      .catch((err) => {
-        if (err instanceof TypeError) setErr({ error: err });
-      });
+    .then((res) => res.json())
+    .then((data) => setForecast({ ...data }))
+    .catch((err) => {
+      if (err instanceof TypeError) setErr({ error: err });
+    });
+    // getCity();
   }, [location, city]);
 
   // Get city coordinates from city name
@@ -58,6 +63,12 @@ function App() {
     fetch(cityurl)
       .then((res) => res.json())
       .then((data) => {
+        if (data.cod === 429) {
+          setErr({ error: data.message });
+        }
+         else if (data.cod === 401) {
+          setErr({ error: data.message });
+        }
         console.log("City Name >>> ", data);
         setCity(data[0].name);
       })
@@ -120,9 +131,8 @@ function App() {
         >
           Forecast
         </button>
-
       </div>
-      {console.log(err)}
+      {console.log("Error >>> ", err)}
       {!Object.keys(err).length ? (
         <>
           <div className="current-weather">

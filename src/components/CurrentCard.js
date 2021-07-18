@@ -6,6 +6,7 @@ import DateCalc from "../utils/dateCalc";
 import "../styles/CurrentCard.css";
 
 function CurrentCard({ weather }) {
+  console.log(weather);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [chart, setChart] = useState(false);
   const daily = weather.daily;
@@ -15,16 +16,17 @@ function CurrentCard({ weather }) {
   const day = `${days[date.getDay()]}`;
   // const weatherChart = new Chart(ctx);
 
+  console.log("Daily ??? ", daily[0]);
+
   // Weekly graph plot
-  const dailyHighs = daily.map(d => d.temp.max);
-  const dailyLows = daily.map(d => d.temp.min);
-  const dailyLabels = daily.map(d => DateCalc(d.dt));
-  
-  console.log(`Daily >> ${+dailyHighs[0] % 100} and ${+dailyLows[0] / 100 }`);
+  const dailyHighs = daily.map((d) => +d.temp.max);
+  const dailyLows = daily.map((d) => +d.temp.min);
+  const dailyLabels = daily.map((d) => DateCalc(d.dt));
+
+  console.log(`Daily >> ${+dailyHighs[0]} and ${+dailyLows[0]}`);
   // Data for chart
   const data = {
     labels: dailyLabels,
-    color: "white",
     datasets: [
       {
         label: "High \xB0	C",
@@ -42,6 +44,11 @@ function CurrentCard({ weather }) {
   // Config for chart
   const options = {
     responsive: true,
+    legend: {
+      labels: {
+        fontColor: "white",
+      },
+    },
     plugins: {
       legend: {
         position: "top",
@@ -60,9 +67,16 @@ function CurrentCard({ weather }) {
         title: {
           display: true,
           text: "Dates",
-          color: "white",
           font: {
             size: "14px",
+          },
+          color: "white",
+          grid: {
+            borderColor: "white",
+            tickColor: "white",
+          },
+          ticks: {
+            color: "white",
           },
         },
       },
@@ -75,6 +89,13 @@ function CurrentCard({ weather }) {
           font: {
             size: "14px",
           },
+        },
+        grid: {
+          borderColor: "white",
+          tickColor: "white",
+        },
+        ticks: {
+          color: "white",
         },
       },
     },
