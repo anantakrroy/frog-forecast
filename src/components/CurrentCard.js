@@ -6,24 +6,24 @@ import DateCalc from "../utils/dateCalc";
 import "../styles/CurrentCard.css";
 
 function CurrentCard({ weather }) {
-  console.log(weather);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [chart, setChart] = useState(false);
   const daily = weather.daily;
   weather = weather.current;
+  // console.log(`weather >>>>>>> ${weather.temp}`);
   const date = new Date(weather.dt * 1000);
   const fdate = `${date.getDate()} / ${date.getMonth()}`;
   const day = `${days[date.getDay()]}`;
   // const weatherChart = new Chart(ctx);
 
-  console.log("Daily ??? ", daily[0]);
+  // console.log("Daily ??? ", daily);
 
   // Weekly graph plot
-  const dailyHighs = daily.map((d) => +d.temp.max);
-  const dailyLows = daily.map((d) => +d.temp.min);
+  let dailyHighs = daily.map((d) => d.temp.max.toFixed(1));
+  let dailyLows = daily.map((d) => d.temp.min.toFixed(1));
   const dailyLabels = daily.map((d) => DateCalc(d.dt));
 
-  console.log(`Daily >> ${+dailyHighs[0]} and ${+dailyLows[0]}`);
+  // console.log(`Daily >> ${dailyHighs} and ${dailyLows}`);
   // Data for chart
   const data = {
     labels: dailyLabels,
@@ -95,7 +95,9 @@ function CurrentCard({ weather }) {
           tickColor: "white",
         },
         ticks: {
-          color: "white",
+          callback: function (val, index) {
+            return val;
+          },
         },
       },
     },
@@ -105,7 +107,7 @@ function CurrentCard({ weather }) {
   return (
     <>
       {/* Show current weather data */}
-      {console.log(chart)}
+      {/* {console.log(chart)} */}
       <div className={chart ? "hide" : "display"}>
         <div className="current-title">
           <p id="curr-title">Current Weather</p>
@@ -141,11 +143,11 @@ function CurrentCard({ weather }) {
           <div className="temps">
             <div className="maxmin">
               <span className="max-label">Temp.</span>
-              <span className="max-val">{weather.temp.toFixed(1)} &#8451;</span>
+              <span className="max-val">{weather.temp} &#8451;</span>
             </div>
             <div className="feels">
               <p>
-                <em>Feels Like : {weather.feels_like.toFixed(1)} &#8451;</em>
+                <em>Feels Like : {weather.feels_like} &#8451;</em>
               </p>
             </div>
             <div className="addl-info">
