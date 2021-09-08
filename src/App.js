@@ -25,18 +25,18 @@ function App() {
   const [err, setErr] = useState({});
 
   useEffect(() => {
-    console.log('useeffect called...API >> ', process.env.APP_ID);
+    // console.log('useeffect called...API >> ', process.env.APP_ID);
     document.getElementById("city-name").value = city;
     // console.log('Value inside useeffect >> ', location);
     const weatherurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&exclude=minutely,hourly&units=metric&appid=94014be88226aec7a02dbc4b61bc3485`;
-    
+
     // Get weather of place
     fetch(weatherurl)
-    .then((res) => res.json())
-    .then((data) => setForecast({ ...data }))
-    .catch((err) => {
-      if (err instanceof TypeError) setErr({ error: err });
-    });
+      .then((res) => res.json())
+      .then((data) => setForecast({ ...data }))
+      .catch((err) => {
+        if (err instanceof TypeError) setErr({ error: err });
+      });
     // getCity();
   }, [location, city]);
 
@@ -56,21 +56,18 @@ function App() {
 
   // Get city name from coordinates
   function getCity() {
-    // setLocation(coords);
-    // console.log('New coords >>> ', location);
-    // document.getElementById('city-name').value = 'loading...';
     const cityurl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${location.latitude}&lon=${location.longitude}&appid=94014be88226aec7a02dbc4b61bc3485`;
     fetch(cityurl)
       .then((res) => res.json())
       .then((data) => {
         if (data.cod === 429) {
           setErr({ error: data.message });
-        }
-         else if (data.cod === 401) {
+        } else if (data.cod === 401) {
           setErr({ error: data.message });
         }
-        console.log("City Name >>> ", data);
+        // console.log("City Name >>> ", data);
         setCity(data[0].name);
+        document.getElementById('city-name').innerText = city;
       })
       .catch((err) => `Error fetching city from coordinates : ${err}`);
   }
@@ -132,7 +129,6 @@ function App() {
           Forecast
         </button>
       </div>
-      {console.log("Error >>> ", err)}
       {!Object.keys(err).length ? (
         <>
           <div className="current-weather">
