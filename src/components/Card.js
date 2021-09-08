@@ -18,7 +18,7 @@ function Card({ weather }) {
                 </div>
                 <div className="details">
                     <div className="description">
-                        <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`} alt={`returt weather icon : ${weather.weather[0].main}`}/>
+                        <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`} alt={`returt weather icon : ${weather.weather[0].main}`}/>
                         <p>{weather.weather[0].description.split(" ").map(e => e.substring(0,1).toUpperCase() + e.substring(1)).join(" ")}</p>
                     </div>
                     <div className="vert-sep"></div>

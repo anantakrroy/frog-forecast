@@ -129,7 +129,7 @@ function CurrentCard({ weather }) {
         <div className="details">
           <div className="description">
             <img
-              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
               alt={`Current weather icon : ${weather.weather[0].main}`}
             />
             <p>

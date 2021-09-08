@@ -43,7 +43,7 @@ function App() {
   // Get city coordinates from city name
   function getCoords(city) {
     setCity(city);
-    const coordsurl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.APP_ID}`;
+    const coordsurl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${process.env.APP_ID}`;
     fetch(coordsurl)
       .then((res) => res.json())
       .then((data) => {
@@ -56,7 +56,7 @@ function App() {
 
   // Get city name from coordinates
   function getCity() {
-    const cityurl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${location.latitude}&lon=${location.longitude}&appid=94014be88226aec7a02dbc4b61bc3485`;
+    const cityurl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${location.latitude}&lon=${location.longitude}&appid=94014be88226aec7a02dbc4b61bc3485`;
     fetch(cityurl)
       .then((res) => res.json())
       .then((data) => {
