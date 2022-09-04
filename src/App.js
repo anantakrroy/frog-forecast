@@ -67,7 +67,7 @@ function App() {
         }
         // console.log("City Name >>> ", data);
         setCity(data[0].name);
-        document.getElementById('city-name').innerText = city;
+        document.getElementById("city-name").innerText = data[0].name;
       })
       .catch((err) => `Error fetching city from coordinates : ${err}`);
   }
@@ -97,28 +97,37 @@ function App() {
   return (
     <div className="container">
       <div className="app-title">
-        <p id="app-title">
-          frog<br></br>
-          <span className="orangeTxt">Forecast</span>
-        </p>
-        <img id="app-logo" src={appLogo} alt="App logo"></img>
+        <div id="app-title">
+          <p>
+            frog<br></br>
+            <span className="orangeTxt">Forecast</span>
+          </p>
+        </div>
+        <div id="app-logo">
+          <img src={appLogo} alt="App logo"></img>
+        </div>
       </div>
       <div className="user-input">
-        <input id="city-name" type="text" placeholder={`${city}`} />
-        <span
-          id="loc-tag"
-          onClick={() => {
-            if ("geolocation" in navigator) {
-              navigator.geolocation.getCurrentPosition(success, error, options);
-            } else {
-              alert(`Geolocation not available ! `);
-            }
-            getCity();
-          }}
-        >
-          <MdMyLocation />
-        </span>
-        {/* <div className="btn-group" id="forecast-btn"> */}
+        <div>
+          <input id="city-name" type="text" placeholder={`${city}`} />
+          <span
+            id="loc-tag"
+            onClick={() => {
+              if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                  success,
+                  error,
+                  options
+                );
+              } else {
+                alert(`Geolocation not available ! `);
+              }
+              getCity();
+            }}
+          >
+            <MdMyLocation />
+          </span>
+        </div>
         <button
           id="forecast-btn"
           onClick={() => {

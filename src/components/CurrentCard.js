@@ -1,6 +1,6 @@
 // import { Chart } from "chart.js";
 import { useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import DateCalc from "../utils/dateCalc";
 // import DayCalc from "../utils/dayCalc";
 import "../styles/CurrentCard.css";
@@ -174,7 +174,7 @@ function CurrentCard({ weather }) {
             Weekly Graph
           </button>
         </div>
-        <Bar data={data} options={options} />
+        <Line data={data} options={options} />
       </div>
     </>
   );
